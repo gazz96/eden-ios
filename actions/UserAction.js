@@ -34,7 +34,7 @@ const UserAction = {
                 'Content-Type': 'multipart/form-data'
             }
         })
-        return response.data;
+        return response;
     },
     getProperty: async(user_id) => 
     {
@@ -179,6 +179,12 @@ const UserAction = {
     },
     topup: async(data) => {
         const response = await axiosRequest.post('topup', data);
+        return response.data;
+    },
+    balance: async(user_id) => {
+        const response = await axiosRequest.post('user/balance', {
+            user_id: user_id
+        });
         return response.data;
     }
 }

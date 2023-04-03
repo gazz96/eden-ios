@@ -41,7 +41,7 @@ const LoginScreen = ({ navigation }) => {
             });
             
             navigation.navigate("Home");
-
+            
             
         }
     }
@@ -112,7 +112,7 @@ const LoginScreen = ({ navigation }) => {
             <ScrollView style={{ flex: 1 }}>
                 
             
-                    <Gap height={40}/>
+                    <Gap height={80}/>
                     <View style={{flexDirection:'row', justifyContent: 'center', flexWrap: 'wrap'}}>
                         <Image source={require('../assets/images/logo-gold.png')} style={{ width: 92, height: 92}} resizeMode="contain"/>
                         <Gap height={15}/>
@@ -130,11 +130,11 @@ const LoginScreen = ({ navigation }) => {
                     <View style={{ width: '100%', paddingHorizontal: 40}}>
                         <Gap height={30}/>
                         <View>
-                            <TextInput style={styles.formControl} onChangeText={newEmail => setEmail(newEmail)} value={email} placeholder="Email" placeholderTextColor="#A3A3A3"/>
+                            <TextInput style={styles.formControl} onChangeText={newEmail => setEmail(newEmail)} value={email} placeholder="Email" placeholderTextColor="#A3A3A3" autoCapitalize='none'/>
                         </View>
                         <Gap height={20}/>
                         <View>
-                            <TextInput style={styles.formControl} secureTextEntry={true} onChangeText={newPassword => setPassword(newPassword)}  value={password} placeholder="Password" placeholderTextColor="#A3A3A3"/>
+                            <TextInput style={styles.formControl} secureTextEntry={true} onChangeText={newPassword => setPassword(newPassword)}  value={password} placeholder="Password" placeholderTextColor="#A3A3A3" autoCapitalize='none'/>
                         </View>
                         <Gap height={34}/>
                         <View style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}>

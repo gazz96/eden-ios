@@ -60,8 +60,29 @@ import { useHookstate } from '@hookstate/core';
                 fontSize: 20,
                 color: '#fffff0',
               }}>
+              CUSTOMER DETAIL
+            </Text>
+            <Gap height={20} />
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Name: {order.first_name} {order.last_name}</Text>
+            </View>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Phone Number: {order.phone_number}</Text>
+            </View>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Address: {order.address}</Text>
+            </View>
+
+            <Gap height={20} />
+            <Text
+              style={{
+                fontFamily: 'Montserrat-Bold',
+                fontSize: 20,
+                color: '#fffff0',
+              }}>
               ORDER DETAIL
             </Text>
+            <Gap height={20} />
             
             {/* <TextInput placeholder='Cari pesanan' style={{
               color: '#222',
@@ -78,7 +99,7 @@ import { useHookstate } from '@hookstate/core';
               {isLoading ? (
                 <ActivityIndicator />
               ) : (
-              
+                
                 order.items.map((cart, index) => {
                     total.set(p => p + (cart.price * cart.qty))
                     return (

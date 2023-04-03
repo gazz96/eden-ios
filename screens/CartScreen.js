@@ -99,7 +99,7 @@ const CartScreen = ({route, navigation }) => {
             <Gap height={20}/>
             <HeaderWithBackButton onPress={() => goBack(navigation)} title={''}/>
             <Gap height={25}/>
-            <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20, color: '#fffff0'}}>CARTS</Text>
+            <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20, color: '#fffff0'}}>CART</Text>
             <Gap height={31}/>
             <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
             {
@@ -117,15 +117,15 @@ const CartScreen = ({route, navigation }) => {
                       <Text style={{fontSize: 12, fontFamily: 'Montserrat-Bold', marginBottom: 5, color: '#fff'}}>{cart.product.name} x{Rp(cart.qty)}</Text>
                       <Text style={{fontSize: 12, fontFamily: 'Montserrat-Bold', marginBottom: 10, color: '#fff'}}>Rp {Rp(cart.product.price)}</Text>
                       <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end'}}>
-                        <Text style={{fontSize: 12, fontFamily: 'Montserrat-Bold', marginBottom: 5, color: '#fff', marginRight: 8}} onPress={() => {
+                        <Text style={{fontSize: 24, fontFamily: 'Montserrat-Bold', marginBottom: 5, color: '#fff', marginRight: 8}} onPress={() => {
                             removeQty(cart.product_id)
                         }}>
-                            <Icon name='minus' size={16}/>
+                            -
                         </Text>
-                        <Text style={{fontSize: 12, fontFamily: 'Montserrat-Bold', marginBottom: 5, color: '#fff', paddingHorizontal: 8}} onPress={() => {
+                        <Text style={{fontSize: 24, fontFamily: 'Montserrat-Bold', marginBottom: 5, color: '#fff', paddingHorizontal: 8}} onPress={() => {
                             addQty(cart.product_id)
                         }}>
-                            <Icon name='plus' size={16}/>
+                            +
                         </Text>
                       </View>
                       {/* <View style={{flexDirection: 'row', alignItems: 'center'}}>

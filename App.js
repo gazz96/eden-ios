@@ -88,6 +88,8 @@ import TimelineScreen from './screens/TimelineScreen';
 import MyOrderDetailScreen from './screens/MyOrderDetailScreen';
 import { hookstate } from '@hookstate/core';
 import ChangeLangScreen from './screens/ChangeLangScreen';
+import HomeOrderScreen from './screens/HomeOrderScreen';
+import FaqScreen from './screens/FaqScreen';
 
 
 // OneSignal Initialization
@@ -152,6 +154,9 @@ function MyDrawer() {
       <Drawer.Screen name="LOGOUT" component={SplashScreen} options={{
         drawerLabel: 'LOG-OUT'
       }} />
+      <Drawer.Screen name="FAQ" component={FaqScreen} options={{
+        drawerLabel: 'FAQ'
+      }} />
 
     </Drawer.Navigator>
   );
@@ -188,6 +193,7 @@ const App = () => {
           <Stack.Screen name="Account Security" component={SecurityScreen}/>
           <Stack.Screen name="My Property" component={MyPropertiScreen}/>
           <Stack.Screen name="My Order" component={MyOrderScreen}/>
+          <Stack.Screen name="Home My Order" component={HomeOrderScreen}/>
           <Stack.Screen name="My Topup" component={MyTopupScreen}/>
           <Stack.Screen name="My Redeem" component={MyRedeemScreen}/>
           <Stack.Screen name="My Review" component={MyReviewScreen}/>
@@ -213,6 +219,7 @@ const App = () => {
           <Stack.Screen name="Timeline" component={TimelineScreen}/>
           <Stack.Screen name="Order Detail" component={MyOrderDetailScreen}/>
           <Stack.Screen name="Change Lang" component={ChangeLangScreen}/>
+          <Stack.Screen name="Favorite" component={FavoritesScreen}/>
           
           
         </Stack.Navigator>

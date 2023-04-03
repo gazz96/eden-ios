@@ -14,32 +14,39 @@ const ResetPasswordScreen = ({ navigation }) => {
 //   const [password, setPassword] = useState('bagast');
 //   const [email, setEmail] = useState('subscribers@gmail.com');
 //   const [password, setPassword] = useState('subscribers');
-  const [email, setEmail] = useState('gazkintzz96@gmail.com');
-  const [password, setPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
+  const [email, setEmail] = useState('Aww@gmail.com');
+  const [password, setPassword] = useState('Aww');
   const [token, setToken] = useState('');
   const [isLoading, setLoading] = useState(false);
-  const [sending, setSending] = useState(false);
+
   const state = UserContext()
 
-
-  const forgotPassword = async() => {
+  const login = async(event) => {
+    event.preventDefault();
     setLoading(true)
     try {
-        const response = await AuthAction.forgetPassword(email);
-        console.log('ForgotPassword', response);
-        if( response.token) {
-            setSending(true)
+        const response = await AuthAction.attempt(email,password);
+        console.log('LOGIN', response);
+        if( response.token && response.user ) {
+            state.set(response.user)
+            setEmail('')
+            setPassword('')
+
             Toast.show({
                 type: 'success',
                 text1: 'Success',
-                text2: 'Token sended to your email',
+                text2: 'Login Success',
                 onHide: () => {
                 }
             });
+            
+            navigation.navigate("Home");
+            
+            
         }
     }
-    catch(error) {
+    catch(error) 
+    {
         if (error.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
@@ -91,89 +98,12 @@ const ResetPasswordScreen = ({ navigation }) => {
     }finally {
         setLoading(false)
     }
-  }
 
-  const createNewPassword = async() => {
-    setLoading(true)
-    try {
-        const response = await AuthAction.newPassword({
-          email: email,
-          token: token, 
-          password: password,
-          new_password: newPassword
-        });
-
-        console.log('CreateNewPassword', response);
-        
-        Toast.show({
-            type: 'success',
-            text1: 'Success',
-            text2: 'Reset Password Success',
-            onHide: () => {
-            }
-        });
-
-        setToken(null)
-        setPassword(null)
-        setNewPassword(null)
-        setEmail(null)
-
-        navigation.navigate('Login')
-       
-    }
-    catch(error) {
-        if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
     
-            if (error.response.status == 422 )  {
-              let errors = error.response.data.errors;
-              for (let err in errors) {
-                console.log(err);
-                for (let message in errors[err]) {
-                  console.log('messagees', errors[err][message]);
-                  Toast.show({
-                    type: 'error',
-                    text1: 'Warning',
-                    text2: errors[err][message],
-                });
-                }
-              }
-            }
-
-            if (error.response.status == 404 )  {
-                let errors = error.response.data.errors;
-                for (let err in errors) {
-                  Toast.show({
-                    type: 'error',
-                    text1: 'Warning',
-                    text2: errors[err],
-                  });
-                }
-              }
-
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            console.log(error.request);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
-            Toast.show({
-              type: 'error',
-              text1: 'Error',
-              text2: error.message,
-            });
-          }
-
-    }finally {
-        setLoading(false)
-    }
   }
+
+ 
+
  
   
   return (
@@ -199,45 +129,19 @@ const ResetPasswordScreen = ({ navigation }) => {
                     {!isLoading ? (
                     <View style={{ width: '100%', paddingHorizontal: 40}}>
                         <Gap height={30}/>
-
                         <View>
                             <TextInput style={styles.formControl} onChangeText={newEmail => setEmail(newEmail)} value={email} placeholder="Email" placeholderTextColor="#A3A3A3"/>
                         </View>
-
-                        {
-                          sending ? (
-                            <>
-                              <Gap height={20}/>
-                              <View>
-                                  <TextInput autoCapitalize='none' maxLength={5} style={styles.formControl} onChangeText={text => setToken(text)} value={token} placeholder="Input Token" placeholderTextColor="#A3A3A3"/>
-                              </View>
-                              
-
-                              <Gap height={20}/>
-                              <View>
-                                  <TextInput autoCapitalize='none' secureTextEntry={true} style={styles.formControl} onChangeText={text => setPassword(text)} value={password} placeholder="Input New Password" placeholderTextColor="#A3A3A3"/>
-                              </View>
-                              
-                              <Gap height={20}/>
-                              <View>
-                                  <TextInput autoCapitalize='none' secureTextEntry={true} style={styles.formControl} onChangeText={text => setNewPassword(text)} value={newPassword} placeholder="Re-Input New Password" placeholderTextColor="#A3A3A3"/>
-                              </View>
-                            </>
-                          ) : <></>
-                        }
-                        
-
+                        {/* <Gap height={20}/> */}
+                        {/* <View style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}> */}
+                        {/* <Text style={[styles.formLabel, {color: '#FFFFF0', fontSize: 14, letterSpacing: .8, fontFamily: 'Montserrat-SemiBold'}]} secureTextEntry={true} onPress={() => navigation.navigate('Reset Password')}>Remember me</Text> */}
+                        {/* <Text style={[styles.formLabel, {color: '#FFFFF0', fontSize: 14, letterSpacing: .8, fontFamily: 'Montserrat-SemiBold'}]} secureTextEntry={true} onPress={() => navigation.navigate('Reset Password')}>Forget Password?</Text> */}
+                        {/* </View> */}
 
                         <Gap height={20}/>
                         {
                             isLoading ? <Text style={styles.btnPrimary}>Loading</Text> : (
-                            <TouchableOpacity style={styles.btnPrimary} onPress={() => {
-                              if(!sending) {
-                                forgotPassword()
-                              }else {
-                                createNewPassword()
-                              }
-                            }}>
+                            <TouchableOpacity style={styles.btnPrimary} onPress={login}>
                                 <Text style={styles.btnPrimary}>Reset Password</Text>
                             </TouchableOpacity>
                             )

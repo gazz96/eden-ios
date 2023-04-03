@@ -128,7 +128,7 @@ export default DetailArticleScreen;
 
 const styles = StyleSheet.create({
   hero: {
-    height: 400,
+    height: 600,
     backgroundColor: '#eee',
   },
   title: {

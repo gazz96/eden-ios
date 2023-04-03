@@ -37,7 +37,8 @@ const LoginScreen = ({navigation}) => {
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
   const formState = useHookstate({
-    name: null,
+    first_name: null,
+    last_name: null,
     email: null,
     phone_number: null,
     dob: null,
@@ -172,9 +173,18 @@ const LoginScreen = ({navigation}) => {
               <View>
                 <TextInput
                   style={styles.formControl}
-                  placeholder={'Full Name'}
+                  placeholder={'First Name'}
                   placeholderTextColor="#A3A3A3"
-                  onChangeText={text => formState.name.set(text)}
+                  onChangeText={text => formState.first_name.set(text)}
+                />
+              </View>
+              <Gap height={26} />
+              <View>
+                <TextInput
+                  style={styles.formControl}
+                  placeholder={'Last Name'}
+                  placeholderTextColor="#A3A3A3"
+                  onChangeText={text => formState.last_name.set(text)}
                 />
               </View>
               <Gap height={26} />
@@ -196,9 +206,10 @@ const LoginScreen = ({navigation}) => {
                 />
               </View>
               <Gap height={26} />
-                <TouchableOpacity onPress={() => setOpen(true)
-                }>
-                    <Text style={{backgroundColor: '#eee', borderRadius: 15, color:'#A3A3A3', 
+                <TouchableOpacity 
+                  onPress={() => setOpen(true)}
+                  style={{borderRadius: 15, backgroundColor: '#eee'}}>
+                    <Text style={{borderRadius: 15, color:'#A3A3A3', 
     paddingHorizontal: 16,
     height: 50, lineHeight: 50, fontSize: 16, 
     fontFamily: 'Montserrat-SemiBold',}}>Birthday <>{formState.dob.get() ? formState.dob.get() : ''}</></Text>
@@ -293,7 +304,10 @@ const LoginScreen = ({navigation}) => {
               {isLoading ? (
                 <Text style={styles.btnPrimary}>Loading</Text>
               ) : (
-                <Pressable onPress={login}>
+                <Pressable onPress={login} style={{
+                  borderRadius: 15,
+                  overflow: 'hidden'
+                }}>
                   <Text style={styles.btnPrimary}>Sign Up</Text>
                 </Pressable>
               )}

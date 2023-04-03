@@ -74,19 +74,11 @@ const MyOrderScreen = ({navigation}) => {
           }>
           <Gap height={20} />
           <HeaderWithBackButton
-            onPress={() => navigation.goBack()}
-            title={''}
+            onPress={() => navigation.navigate('Dashboard')}
+            title={' MY ORDER'}
           />
           <Gap height={25} />
-          <Text
-            style={{
-              fontFamily: 'Montserrat-Bold',
-              fontSize: 20,
-              color: '#fffff0',
-            }}>
-            MY ORDER
-          </Text>
-          <Gap height={31} />
+
           {/* <TextInput placeholder='Cari pesanan' style={{
             color: '#222',
             borderWidth: 1,

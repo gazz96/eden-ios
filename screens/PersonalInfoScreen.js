@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  KeyboardAvoidingView,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 
@@ -35,7 +36,8 @@ const PersonalInfoScreen = ({navigation}) => {
   const userState = UserContext();
   const personalInfoState = useHookstate({
     id: '',
-    name: null,
+    first_name: null,
+    last_name: null,
     email: null,
     phone_number: null,
     dob: null,
@@ -49,11 +51,11 @@ const PersonalInfoScreen = ({navigation}) => {
     let fd = new FormData();
     const keys = personalInfoState.keys;
     for (let key in keys) {
-      console.log(keys[key], personalInfoState[keys[key]].get());
       fd.append(keys[key], personalInfoState[keys[key]].get());
     }
 
     try {
+      console.log(fd);
       const response = await UserAction.update(fd);
       Toast.show({
         type: 'success',
@@ -61,12 +63,27 @@ const PersonalInfoScreen = ({navigation}) => {
         text2: 'Changes Saved',
       });
     } catch (error) {
+      if(error.response) {
+        console.log('reponse')
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+      else if(error.request) {
+        console.log('request')
+        console.log(error.request)
+      }
+      else {
+        console.log('Error', error)
+      }
+      console.log('update profile error.response', error)
       console.log('update profile', error.response.data);
       Toast.show({
         type: 'error',
         text1: 'Peringatan',
         text2: error.response.data.message,
       });
+
     } finally {
       setLoading(false);
     }
@@ -83,12 +100,18 @@ const PersonalInfoScreen = ({navigation}) => {
       //const response = await UserAction.me(108);
 
       personalInfoState.id.set(response.id);
-      personalInfoState.name.set(response.name);
+      personalInfoState.first_name.set(response.first_name);
+      personalInfoState.last_name.set(response.last_name);
       personalInfoState.email.set(response.emmail);
       personalInfoState.phone_number.set(response.phone_number);
       personalInfoState.address.set(response.address);
-      console.log(BASE_URL + '/' + response.photo);
+      if(response.dob) {
+        setDate(new Date(response.dob))
+      }
+      console.log('response.photo', BASE_URL + '/' + response.photo)
       setPreviewThumbnail(BASE_URL + '/' + response.photo);
+      
+      
     } catch (error) {
       console.log(error.response);
     } finally {
@@ -99,7 +122,7 @@ const PersonalInfoScreen = ({navigation}) => {
   const includeExtra = true;
   const launchImageLibrary = () => {
     let options = {
-      selectionLimit: 0,
+      selectionLimit: 1,
       mediaType: 'photo',
       includeBase64: false,
       includeExtra,
@@ -118,8 +141,10 @@ const PersonalInfoScreen = ({navigation}) => {
       } else {
         const source = {uri: response.uri};
         console.log('response', JSON.stringify(response));
+        
         let assets = response.assets;
         assets.map((asset, index) => {
+          
           personalInfoState.photo.set({
             uri: asset.uri,
             type: asset.type,
@@ -136,6 +161,7 @@ const PersonalInfoScreen = ({navigation}) => {
   }, []);
 
   return (
+    <KeyboardAvoidingView behavior='padding' style={{flex: 1}}>
     <LinearGradient colors={['#272727', '#13140D']} style={styles.container}>
       <ImageBackground
         source={require('../assets/images/long-background.png')}
@@ -143,27 +169,29 @@ const PersonalInfoScreen = ({navigation}) => {
         style={{width: '100%', flex: 1, height: '100%'}}>
         <ScrollView style={{flex: 1, paddingHorizontal: 20}}>
           <Gap height={20} />
-          <HeaderWithBackButton title="" onPress={() => navigation.goBack()} />
+          <HeaderWithBackButton title="EDIT PROFILE" onPress={() => navigation.goBack()} />
           <Gap height={25} />
-          <Text
-            style={{
-              fontFamily: 'Montserrat-Bold',
-              fontSize: 20,
-              color: '#FFFFF0',
-            }}>
-            EDIT PROFILE
-          </Text>
-          <Gap height={25} />
+    
           {isLoading ? (
             <Loading />
           ) : (
             <View>
               <View>
-                <Text style={styles.formLabel}>NAME</Text>
+                <Text style={styles.formLabel}>FIRST NAME</Text>
                 <TextInput
                   style={styles.formControl}
-                  onChangeText={text => setValue('name', text)}
-                  value={personalInfoState.name.get()}
+                  onChangeText={text => setValue('first_name', text)}
+                  value={personalInfoState.first_name.get()}
+                />
+              </View>
+              <Gap height={20} />
+
+              <View>
+                <Text style={styles.formLabel}>LAST NAME</Text>
+                <TextInput
+                  style={styles.formControl}
+                  onChangeText={text => setValue('last_name', text)}
+                  value={personalInfoState.last_name.get()}
                 />
               </View>
               <Gap height={20} />
@@ -189,7 +217,10 @@ const PersonalInfoScreen = ({navigation}) => {
 
               <View>
                 <Text style={styles.formLabel}>DATE OF BIRTH</Text>
-                <TouchableOpacity onPress={() => {
+                <TouchableOpacity style={{
+                  borderRadius: 15,
+                  backgroundColor: '#eee'
+                }} onPress={() => {
                   setOpen(true)
                 }}>
                   <Text style={{
@@ -200,9 +231,9 @@ const PersonalInfoScreen = ({navigation}) => {
                     fontSize: 16,
                     paddingHorizontal: 16,
                     color: Colors.dark,
-                    backgroundColor: '#eee',
                     fontFamily: 'Montserrat-SemiBold',
-                    lineHeight: 50
+                    overflow: 'hidden',
+                    lineHeight: 50,
                   }}>{moment(date).format('YYYY-MM-DD')}</Text>
                 </TouchableOpacity>
               </View>
@@ -223,7 +254,7 @@ const PersonalInfoScreen = ({navigation}) => {
                                 mode="date"
                     fadeToColor="#eee"
                     textColor="#A3A3A3"
-                    style={{fontFamily: 'Montserrat-SemiBold', width: 300}}
+                    style={{fontFamily: 'Montserrat-SemiBold', width: 300, borderRadius: 15}}
                 />
 
               <View>
@@ -284,6 +315,7 @@ const PersonalInfoScreen = ({navigation}) => {
         </ScrollView>
       </ImageBackground>
     </LinearGradient>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -14,7 +14,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {UserContext} from '../context';
 
 
-const ShopScreen = ({route, navigation }) => {
+const FavoritesScreen = ({route, navigation }) => {
 
     const authUser = UserContext();
     const [isLoading, setLoading] = useState(true);
@@ -74,10 +74,8 @@ const ShopScreen = ({route, navigation }) => {
         }>
           <View style={{ paddingHorizontal: 20 }}>
             <Gap height={20}/>
-            <HeaderWithBackButton onPress={() => goBack(navigation)} title={''}/>
+            <HeaderWithBackButton onPress={() => goBack(navigation)} title={'FAVORITE'}/>
             <Gap height={25}/>
-            <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20, color: '#fffff0'}}>FAVORITES</Text>
-            <Gap height={31}/>
             <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
             {
               isLoading ? <ActivityIndicator/> : favorites.map((favorite, index) => {
@@ -136,7 +134,7 @@ const ShopScreen = ({route, navigation }) => {
   )
 }
 
-export default ShopScreen
+export default FavoritesScreen
 
 const goBack = (navigation) => {
   navigation.goBack()

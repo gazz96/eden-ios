@@ -62,14 +62,11 @@ const ShopScreen = ({route, navigation }) => {
   return (
     <LinearGradient colors={['#272727', '#13140D']} style={styles.container}>
       <ImageBackground source={require('../assets/images/long-background.png')} resizeMode="cover" style={{width: '100%', flex: 1, height: '100%'}}>
-        <ScrollView style={styles.container} onScroll={({nativeEvent}) => {
-        }}>
+        <ScrollView style={styles.container}>
           <View style={{ paddingHorizontal: 20 }}>
             <Gap height={20}/>
-            <HeaderWithBackButton onPress={() => goBack(navigation)} title={''}/>
+            <HeaderWithBackButton onPress={() => goBack(navigation)} title={'DELIVERY ORDER'}/>
             <Gap height={25}/>
-            <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20, color: '#fffff0'}}>SHOP</Text>
-            <Gap height={31}/>
             <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
             {
               isLoading ? <ActivityIndicator/> : products.map((product, index) => {

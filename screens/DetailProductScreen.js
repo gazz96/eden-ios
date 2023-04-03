@@ -151,6 +151,8 @@ const DetailProductScreen = ({route, navigation}) => {
         text1: 'Success',
         text2: 'Added to cart',
     });
+
+    navigation.navigate('Checkout')
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -263,7 +265,7 @@ const DetailProductScreen = ({route, navigation}) => {
                     />
                   </View>
                   </Pressable>
-                  <Pressable onPress={() => navigation.navigate('Carts')}>
+                  {/* <Pressable onPress={() => navigation.navigate('Carts')}>
                   <View
                     style={{
                       width: 40,
@@ -276,11 +278,9 @@ const DetailProductScreen = ({route, navigation}) => {
                       lineHeight: 40,
                       marginTop: 30
                     }}>
-                    <Image
-                      source={require('../assets/images/shopping-bag-icon.png')}
-                    />
+                    <Image source={require('../assets/images/love-icon.png')}/>
                   </View>
-                  </Pressable>
+                  </Pressable> */}
                 </View>
               </ImageBackground>
               <View style={styles.container}>
@@ -324,7 +324,7 @@ const DetailProductScreen = ({route, navigation}) => {
             <LinearGradient
               colors={['#FFDD9C', '#BC893C']}
               style={{borderRadius: 15}}>
-              <Text style={styles.btnPrimary}>Add to Cart</Text>
+              <Text style={styles.btnPrimary}>Order Delivery</Text>
             </LinearGradient>
           </TouchableOpacity>
           <TouchableOpacity

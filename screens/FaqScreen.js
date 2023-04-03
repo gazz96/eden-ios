@@ -12,7 +12,7 @@ import RenderHtml from 'react-native-render-html';
 import LinearGradient from 'react-native-linear-gradient'
 import { HeaderWithBackButton } from '../components'
 import WebView from 'react-native-webview'
-const AboutScreen = ({route, navigation}) => {
+const FaqScreen = ({route, navigation}) => {
     //const { article } = route.params;
     let getImage = (image) => {
         return {
@@ -27,19 +27,34 @@ const AboutScreen = ({route, navigation}) => {
                 {/* <ScrollView style={{  height: '100%', paddingHorizontal: 20 }}> */}
                     <Gap height={20}/>
                     <View style={{paddingHorizontal: 20}}>
-                        <HeaderWithBackButton onPress={() => navigation.goBack() } />
+                        <HeaderWithBackButton onPress={() => navigation.goBack() } title="FAQ" />
                     </View>
-                    <Gap height={20}/>
-                    <WebView source={{
-                        uri: 'https://edenhookah.com'
-                    }}/>
+                    <Gap height={30}/>
+                     <View style={{paddingHorizontal: 20}}>
+                        <View style={{marginBottom: 20}}>
+                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>QUESTION: QUESTION </Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>ANSWER</Text>
+                        </View>
+                        <View style={{marginBottom: 20}}>
+                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>QUESTION: QUESTION </Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>ANSWER</Text>
+                        </View>
+                        <View style={{marginBottom: 20}}>
+                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>QUESTION: QUESTION </Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>ANSWER</Text>
+                        </View>
+                        <View style={{marginBottom: 20}}>
+                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>QUESTION: QUESTION </Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>ANSWER</Text>
+                        </View>
+                     </View>
                 {/* </ScrollView> */}
             </ImageBackground>
         </LinearGradient>
     )
 }
 
-export default AboutScreen
+export default FaqScreen
 
 const styles = StyleSheet.create({
     hero: {

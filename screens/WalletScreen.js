@@ -58,9 +58,12 @@ const WalletScreen = ({navigation}) => {
       setAmount(0);
       setShow(-1);
 
+      console.log('response', response)
+
       navigation.navigate('Topup', {
         topup: response,
       });
+      
     } catch (error) {
       console.log('error');
       console.log(error.response.data);
@@ -102,7 +105,9 @@ const WalletScreen = ({navigation}) => {
             <Gap height={25} />
             <HeaderWithBackButton
               title=""
-              onPress={() => navigation.goBack()}
+              onPress={() => navigation.navigate('Home', {
+                screen: 'HOME'
+              })}
             />
             <Gap height={25} />
             <Text
@@ -230,6 +235,7 @@ const WalletScreen = ({navigation}) => {
           snapPoints={snapPoints}
           onChange={handleSheetChanges}
           enablePanDownToClose={true}>
+          {topuploading ? <ActivityIndicator/> : 
           <View style={styles.contentContainer}>
             <Text
               style={{
@@ -269,14 +275,11 @@ const WalletScreen = ({navigation}) => {
               <LinearGradient
                 colors={['#FFDD9C', '#BC893C']}
                 style={{borderRadius: 15}}>
-                {topuploading ? (
-                  <Text style={styles.btnPrimary}>LOADING...</Text>
-                ) : (
                   <Text style={styles.btnPrimary}>TOP UP</Text>
-                )}
               </LinearGradient>
             </TouchableOpacity>
           </View>
+          }
         </BottomSheet> }
         
       </LinearGradient>

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>eden</string>
+	<string>Eden Longue</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -40,7 +40,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>for application functionality to run specific functionality</string>
 	<key>NSCameraUsageDescription</key>
-	<string>for application functionality to run specific functionality</string>
+	<string>App need camera access permission for testing</string>
 	<key>NSContactsUsageDescription</key>
 	<string>for application functionality to run specific functionality</string>
 	<key>NSDesktopFolderUsageDescription</key>
@@ -57,8 +57,19 @@
 	<string>for application functionality to run specific functionality</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tel:</string>
+		<string>tel://</string>
+	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App nneds microphone access permission for testing</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App need photo library access</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>for application functionality to run specific functionality</string>
+	<key>NSSupportsSuddenTermination</key>
+	<false/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Black.ttf</string>

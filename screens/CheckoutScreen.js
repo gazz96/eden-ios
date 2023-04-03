@@ -14,25 +14,30 @@ import {
 import React, {useState, useEffect} from 'react';
 
 import {BASE_URL, Colors, Rp, UPLOAD_URL} from '../constant';
-import {CartAction, ProductAction} from '../actions';
+import {CartAction, ProductAction, UserAction} from '../actions';
 
 import {Gap, HeaderWithBackButton} from '../components';
 import {UserContext} from '../context';
 import LinearGradient from 'react-native-linear-gradient';
 import {useHookstate} from '@hookstate/core';
 import Toast from 'react-native-toast-message';
+import SelectDropdown from 'react-native-select-dropdown';
 
 const CheckoutScreen = ({route, navigation}) => {
   const [isLoading, setLoading] = useState(true);
+  const [isLoadingBalance, setLoadingBalance] = useState(true);
   const [carts, setCarts] = useState([]);
   const total = useHookstate(0);
   const auth = UserContext();
-
+  //const payment_methods = ['Wallet', 'Direct Payment'];
+  const [balance, setBalance] = useState(0);
   const form = useHookstate({
     user_id: auth.get().id,
-    name: auth.get().name,
+    first_name: auth.get().first_name,
+    last_name: auth.get().last_name,
     address: auth.get().address,
-    phone_number: auth.get().phone_number
+    phone_number: auth.get().phone_number,
+    payment_method: 'Direct Payment',
   });
 
   const getCarts = async (params = {}) => {
@@ -43,8 +48,8 @@ const CheckoutScreen = ({route, navigation}) => {
         user_id: auth.get().id,
       });
       response.map(cart => {
-        total.set(p => p +( cart.qty * cart.product.price ))
-      })
+        total.set(p => p + cart.qty * cart.product.price);
+      });
       setCarts(response);
     } catch (error) {
       console.log('error', error);
@@ -53,7 +58,21 @@ const CheckoutScreen = ({route, navigation}) => {
     }
   };
 
+  const getBalance = async () => {
+    setLoadingBalance(true);
+    try {
+      const response = await UserAction.balance(auth.get().id);
+      console.log('success', response);
+      setBalance(response);
+    } catch (e) {
+      console.log('error getBalance', e.response);
+    } finally {
+      setLoadingBalance(false);
+    }
+  };
+
   useEffect(() => {
+    getBalance();
     const unsubscribe = navigation.addListener(
       'focus',
       () => {
@@ -64,15 +83,42 @@ const CheckoutScreen = ({route, navigation}) => {
   }, []);
 
   const orderProduct = async () => {
+    setLoading(true);
     try {
+      if (total > balance) {
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: 'Balance Insufficient',
+        });
+        return;
+      }
+
       const response = await ProductAction.order(form.get());
       console.log(response);
 
-      navigation.navigate('Gateway', {
-        orderId: response.order.id,
-        order: response.order,
-      });
+      if (form.payment_method.get() == 'Direct Payment') {
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: 'Order Success',
+        });
 
+        navigation.navigate('Home');
+        // navigation.navigate('Gateway', {
+        //   orderId: response.order.id,
+        //   order: response.order,
+        // });
+      }
+
+      if (form.payment_method.get() == 'Wallet') {
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: 'Order Success',
+        });
+        navigation.navigate('My Order');
+      }
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -125,7 +171,6 @@ const CheckoutScreen = ({route, navigation}) => {
     }
   };
 
-
   const productThumbnail = image => {
     return {
       uri: BASE_URL + '/' + image,
@@ -140,15 +185,49 @@ const CheckoutScreen = ({route, navigation}) => {
     );
   };
 
+  const removeQty = async(product_id) => {
+    setLoading(true)
+    setCarts([])
+    try {
+        const response = await CartAction.remove({
+            user_id: auth.get().id,
+            product_id: product_id
+        })
+        console.log('response', response)
+        setCarts(response);
+    }catch(error) {
+        console.log('error', error)
+    }finally{
+        setLoading(false)
+    }
+}
+
+const addQty = async(product_id) => {
+    setLoading(true)
+    setCarts([])
+    try {
+        const response = await CartAction.add({
+            user_id: auth.get().id,
+            product_id: product_id
+        })
+        console.log('response', response)
+        setCarts(response);
+    }catch(error) {
+        console.log('error', error)
+    }finally{
+        setLoading(false)
+    }
+}
+
   return (
     <LinearGradient colors={['#272727', '#13140D']} style={styles.container}>
       <ImageBackground
         source={require('../assets/images/long-background.png')}
         resizeMode="cover"
         style={{width: '100%', flex: 1, height: '100%'}}>
-        <ScrollView style={styles.container} onScroll={({nativeEvent}) => {}}>
+        <ScrollView style={styles.container}>
           <View style={{paddingHorizontal: 20}}>
-            <Gap height={20} />
+            <Gap height={40} />
             <HeaderWithBackButton
               onPress={() => goBack(navigation)}
               title={''}
@@ -176,9 +255,19 @@ const CheckoutScreen = ({route, navigation}) => {
               <View>
                 <TextInput
                   style={styles.formControl}
-                  onChangeText={newText => form.name.set(newText)}
-                  value={form.name.get()}
-                  placeholder="Name"
+                  onChangeText={newText => form.first_name.set(newText)}
+                  value={form.first_name.get()}
+                  placeholder="First Name"
+                  placeholderTextColor="#A3A3A3"
+                />
+              </View>
+              <Gap height={20} />
+              <View>
+                <TextInput
+                  style={styles.formControl}
+                  onChangeText={newText => form.last_name.set(newText)}
+                  value={form.last_name.get()}
+                  placeholder="Last Name"
                   placeholderTextColor="#A3A3A3"
                 />
               </View>
@@ -195,7 +284,12 @@ const CheckoutScreen = ({route, navigation}) => {
               <Gap height={20} />
               <View>
                 <TextInput
-                  style={styles.formControl}
+                  style={[
+                    styles.formControl,
+                    {
+                      height: 100,
+                    },
+                  ]}
                   onChangeText={newText => form.address.set(newText)}
                   value={form.address.get()}
                   placeholder="Shipping Address"
@@ -205,6 +299,36 @@ const CheckoutScreen = ({route, navigation}) => {
                   multiline={true}
                 />
               </View>
+              <Gap height={20} />
+              {/* <View>
+                <SelectDropdown
+                  data={payment_methods}
+                  search={false}
+                  defaultButtonText="Select Payment Method"
+                  buttonStyle={{
+                    width: '100%',
+                    borderBottomWidth: 1,
+                    borderRadius: 15,
+                    paddingLeft: 0,
+                  }}
+                  buttonTextStyle={{
+                    fontFamily: 'Montserrat-SemiBold',
+                    color: '#222',
+                  }}
+                  dropdownStyle={{}}
+                  onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index);
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    form.payment_method.set(selectedItem);
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                   rray is an array of objects then return item.property to represent item in dropdown
+                    return item;
+                  }}
+                />
+              </View> */}
             </View>
             <Gap height={31} />
             <Text
@@ -273,7 +397,20 @@ const CheckoutScreen = ({route, navigation}) => {
                             }}>
                             Rp {Rp(cart.product.price)}
                           </Text>
+                          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 10}}>
+                            <Text style={{fontSize: 24, fontFamily: 'Montserrat-Bold', marginBottom: 5, color: '#fff', marginRight: 8}} onPress={() => {
+                                removeQty(cart.product_id)
+                            }}>
+                                -
+                            </Text>
+                            <Text style={{fontSize: 24, fontFamily: 'Montserrat-Bold', marginBottom: 5, color: '#fff', paddingHorizontal: 8}} onPress={() => {
+                                addQty(cart.product_id)
+                            }}>
+                                +
+                            </Text>
+                          </View>
                         </View>
+                       
                       </View>
                     </TouchableOpacity>
                   );
@@ -310,7 +447,19 @@ const CheckoutScreen = ({route, navigation}) => {
               padding: 20,
               flexDirection: 'row',
               justifyContent: 'space-between',
+              backgroundColor: '#fff',
+              flexWrap: 'wrap',
             }}>
+            {/* {isLoadingBalance ? (
+              <ActivityIndicator />
+            ) : (
+              <View>
+                <Text style={{color: '#222'}}>Balance</Text>
+                <Text style={{color: '#222'}}>{Rp(balance)}</Text>
+              </View>
+            )} */}
+
+            <Gap height={5} />
             <TouchableOpacity
               style={{width: '100%'}}
               onPress={() => {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -7,11 +7,12 @@ import {
 
 import {LangContext, UserContext} from '../context';
 import {BASE_URL} from '../constant';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+// import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import Gap from './Gap';
 import {useNavigation} from '@react-navigation/native';
 import SelectDropdown from 'react-native-select-dropdown';
+import { AuthAction } from '../actions';
 
 const CustomDrawer = props => {
   const navigation = useNavigation();
@@ -86,25 +87,34 @@ const CustomDrawer = props => {
               ABOUT EDEN
             </Text>
           </TouchableOpacity>
-          <Gap height={20} />
+          {/* <Gap height={20} />
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('CARTS EDEN');
             }}>
             <Text style={{color: '#fff', fontFamily: 'Montserrat-SemiBold'}}>
-              CARTS
+              CART
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <Gap height={20} />
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('FAVORITES');
             }}>
             <Text style={{color: '#fff', fontFamily: 'Montserrat-SemiBold'}}>
-              FAVORITES
+              FAVORITE
             </Text>
           </TouchableOpacity>
-          <Gap height={20} />
+          <Gap height={20}/>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('FAQ');
+            }}>
+            <Text style={{color: '#fff', fontFamily: 'Montserrat-SemiBold'}}>
+              FAQ
+            </Text>
+          </TouchableOpacity>
+          {/* <Gap height={20} />
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('WALLET');
@@ -112,7 +122,7 @@ const CustomDrawer = props => {
             <Text style={{color: '#fff', fontFamily: 'Montserrat-SemiBold'}}>
               WALLET
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <Gap height={20} />
           <TouchableOpacity
             onPress={() => {
@@ -130,8 +140,11 @@ const CustomDrawer = props => {
           </TouchableOpacity> */}
 
           <Gap height={20} />
+          
           <TouchableOpacity
             onPress={() => {
+              user.set({})
+              AuthAction.clearSess()
               navigation.navigate('LOGOUT');
             }}>
             <Text style={{color: '#fff', fontFamily: 'Montserrat-SemiBold'}}>
@@ -140,7 +153,7 @@ const CustomDrawer = props => {
           </TouchableOpacity>
         </View>
       </DrawerContentScrollView>
-      <View
+      {/* <View
         style={{
           padding: 20,
           flexDirection: 'row',
@@ -211,7 +224,7 @@ const CustomDrawer = props => {
             return item.label;
           }}
         />
-      </View>
+      </View> */}
     </View>
   );
 };

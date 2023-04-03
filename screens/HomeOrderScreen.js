@@ -15,8 +15,9 @@ import {
   import {UserAction} from '../actions';
   import {UserContext} from '../context';
   import LinearGradient from 'react-native-linear-gradient';
+  import { TouchableOpacity } from 'react-native';
   
-  const MyRedeemScreen = ({navigation}) => {
+  const HomeOrderScreen = ({navigation}) => {
     const [orders, setOrders] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [keyword, setKeyword] = useState('');
@@ -25,14 +26,12 @@ import {
     const state = UserContext();
     const getMyOrders = async () => {
       try {
-        const response = await UserAction.getRedeems({
+        const response = await UserAction.getOrders({
           user_id: state.get().id,
         });
-        console.log(response.data);
         setOrders(response.data);
-        setLoading(false);
       } catch (error) {
-        console.log(error.response);
+        console.log(error);
       } finally {
         setLoading(false);
       }
@@ -76,9 +75,18 @@ import {
             <Gap height={20} />
             <HeaderWithBackButton
               onPress={() => navigation.goBack()}
-              title={'MY REDEEM'}
+              title={''}
             />
             <Gap height={25} />
+            <Text
+              style={{
+                fontFamily: 'Montserrat-Bold',
+                fontSize: 20,
+                color: '#fffff0',
+              }}>
+              MY ORDER
+            </Text>
+            <Gap height={31} />
             {/* <TextInput placeholder='Cari pesanan' style={{
               color: '#222',
               borderWidth: 1,
@@ -108,15 +116,16 @@ import {
                         fontFamily: 'Montserrat-SemiBold',
                         fontSize: 18,
                       }}>
-                      {JSON.parse(order.items[0].gift)?.name}
+                      {order.name}
                     </Text>
+                    
                     <Gap height={5} />
                     <Text
                       style={{
                         color: '#222',
                         fontFamily: 'Montserrat-SemiBold',
-                      }}>
-                      {order.code}
+                      }} > 
+                      {order.code} 
                     </Text>
                     <Text
                       style={{
@@ -124,6 +133,7 @@ import {
                         fontFamily: 'Montserrat-SemiBold',
                       }}>
                       {order.order_date}
+  
                     </Text>
   
                     <Gap height={20} />
@@ -138,7 +148,7 @@ import {
                           fontFamily: 'Montserrat-SemiBold',
                           fontSize: 16
                         }}>
-                        EDC {Rp(order.amount)}
+                        Rp {Rp(order.amount)}
                       </Text>
                       <Text
                         style={{
@@ -148,6 +158,38 @@ import {
                         }}>
                         {order.status}
                       </Text>
+                    </View>
+  
+                    <View style={{flexDirection: 'row', 'justifyContent': 'space-between'}}>
+                      <TouchableOpacity
+                          style={{width: '49%'}}
+                          onPress={() => navigation.navigate("Order Detail", {
+                            order: order
+                          })}>
+                          <Text style={{backgroundColor: '#222', borderRadius: 8, color: '#fff', padding: 15, marginTop: 20, textAlign: 'center', fontFamily: 'Montserrat-SemiBold'}}>Detail</Text>
+                      </TouchableOpacity>
+                      {
+                        order.status == "Process" && order.token ? 
+                        <TouchableOpacity
+                          style={{width: '49%'}}
+                          onPress={() => navigation.navigate("Gateway", {
+                            orderId: order.id,
+                            order: order
+                          })}>
+                          <Text style={{backgroundColor: '#222', borderRadius: 8, color: '#fff', padding: 15, marginTop: 20, textAlign: 'center', fontFamily: 'Montserrat-SemiBold'}}>Pay</Text>
+                        </TouchableOpacity> : <></>
+                      }
+  
+                      {
+                        order.status == "Success" && order.token ? 
+                        <TouchableOpacity
+                          style={{width: '49%'}}
+                          onPress={() => navigation.navigate("Timeline", {
+                            order: order,
+                          })}>
+                          <Text style={{backgroundColor: '#222', borderRadius: 8, color: '#fff', padding: 15, marginTop: 20, textAlign: 'center', fontFamily: 'Montserrat-SemiBold'}}>Tracking</Text>
+                        </TouchableOpacity> : <></>
+                      }
                     </View>
                   </View>
                 ))
@@ -159,7 +201,7 @@ import {
     );
   };
   
-  export default MyRedeemScreen;
+  export default HomeOrderScreen;
   
   const styles = StyleSheet.create({
     container: {

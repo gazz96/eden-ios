@@ -7,7 +7,7 @@ import {initReactI18next} from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      'thanks.order': 'THANKS FOR THE ORDER',
+      'thanks.order': 'GIVE US A REVIEW',
       'help.us': 'Help us to become even better. Leave your feedback',
       'wallet': 'Wallet',
       'all': 'All',
@@ -19,7 +19,7 @@ const resources = {
   },
   gr: {
     translation: {
-      'thanks.order': 'DANKE FÜR DIE BESTELLUNG',
+      'thanks.order': 'GEBEN SIE UNS EINE BEWERTUNG',
       'help.us': 'Helfen Sie uns, noch besser zu werden. Hinterlassen Sie Ihr Feedback',
       'wallet': 'Geldbörse',
       'all': 'Alle',
@@ -31,7 +31,7 @@ const resources = {
   },
   ru: {
     translation: {
-      'thanks.order': 'TСПАСИБО ЗА ЗАКАЗ',
+      'thanks.order': 'ДАЙТЕ НАМ ОБЗОР',
       'help.us': 'Помогите нам стать еще лучше. Оставьте свой отзыв',
       'wallet': 'кошелек',
       'all': 'Все',
@@ -43,7 +43,7 @@ const resources = {
   },
   ar: {
     translation: {
-      'thanks.order': 'شكرا على النظام',
+      'thanks.order': 'أعطنا مراجعة',
       'help.us': 'ساعدنا لنصبح أفضل. اترك ملاحظاتك',
       'wallet': 'محفظة',
       'all': 'الجميع',
@@ -55,7 +55,7 @@ const resources = {
   },
   id: {
     translation: {
-      'thanks.order': 'TERIMA KASIH PESANANNYA',
+      'thanks.order': 'BERIKAN REVIEW',
       'help.us': 'Bantu kami untuk menjadi lebih baik lagi. Tinggalkan umpan balik Anda',
       'wallet': 'Dompet',
       'all': 'Semua',

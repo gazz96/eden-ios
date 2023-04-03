@@ -67,10 +67,8 @@ const RedeemScreen = ({route, navigation }) => {
         }}>
           <View style={{ paddingHorizontal: 20 }}>
             <Gap height={20}/>
-            <HeaderWithBackButton onPress={() => goBack(navigation)} title={''}/>
+            <HeaderWithBackButton onPress={() => goBack(navigation)} title={'REDEEM'}/>
             <Gap height={25}/>
-            <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20, color: '#fffff0'}}>REDEEM</Text>
-            <Gap height={31}/>
             <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
             {
               isLoading ? <ActivityIndicator/> : products.map((product, index) => {

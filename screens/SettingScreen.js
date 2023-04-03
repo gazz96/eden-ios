@@ -9,9 +9,19 @@ import HeaderWithBackButton from '../components/HeaderWithBackButton';
 import { Colors, UPLOAD_URL } from '../constant';
 import Gap from '../components/Gap';
 import { UserContext } from '../context';
-
+import { AuthAction } from '../actions';
 
 const SettingScreen = ({ navigation }) => {
+
+  const doLogout = async() => {
+    await AuthAction.clearSess()
+    state.setUser({});
+    setTimeout(() => {
+      navigation.navigate('Home')
+    }, 3000)
+    
+  }
+
   const state = UserContext();
   return (
     <ScrollView style={styles.container}>
@@ -112,8 +122,7 @@ const SettingScreen = ({ navigation }) => {
       
       <Gap height={50}/>
       <Pressable style={{ justifyContent: 'center',  flexDirection:'row'}} onPress={()=> { 
-        state.setUser({});
-        navigation.navigate('Home')
+        doLogout()
       }}>
         <Text style={{ backgroundColor: Colors.primary, height: 40, width: 150, color: '#fff', textAlign: 'center', lineHeight: 40, borderRadius: 10, fontWeight:'bold'}}>Logout</Text>
       </Pressable>

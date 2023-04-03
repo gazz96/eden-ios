@@ -44,7 +44,7 @@ const BlogsScreen = ({ navigation }) => {
         <ImageBackground source={require('../assets/images/long-background.png')} resizeMode="cover" style={{width: '100%', flex: 1, height: '100%'}}>
             <ScrollView style={[styles.container, { paddingHorizontal: 16}]}>
                 <Gap height={20}/>
-                <HeaderWithBackButton title="Blogs" onPress={() => navigation.goBack()}/>
+                <HeaderWithBackButton title="NEWS & PROMOTIONS" onPress={() => navigation.goBack()}/>
                 <Gap height={40}/>
 
                 <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>

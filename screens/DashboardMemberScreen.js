@@ -13,11 +13,12 @@ import {
   import {Gap, HeaderWithBackButton} from '../components';
   import { UserContext } from '../context';
   import { BASE_URL, Rp } from '../constant';
-  import { UserAction } from '../actions';
+  import { AuthAction, UserAction } from '../actions';
   import { ActivityIndicator } from 'react-native';
+  import { useNavigation } from '@react-navigation/native';
   
-  const DashboardMemberScreen = ({ navigation }) => {
-    
+  const DashboardMemberScreen = () => {
+    const navigation = useNavigation()
     const state = UserContext();
     const [user, setUser] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -53,17 +54,19 @@ import {
           style={{width: '100%', flex: 1, height: '100%'}}>
           <ScrollView style={{flex: 1, paddingHorizontal: 20}}>
             <Gap height={25} />
-            <HeaderWithBackButton title="" onPress={() => navigation.goBack()} />
+            <HeaderWithBackButton title="MEMBER DASHBOARD" onPress={() => navigation.navigate('Home', {
+              screen: 'HOME'
+            })}/>
             <Gap height={25} />
-            <Text
+            {/* <Text
               style={{
                 fontFamily: 'Montserrat-Bold',
                 fontSize: 20,
                 color: '#FFFFF0',
               }}>
-              MEMBER DASHBOARD
+              
             </Text>
-            <Gap height={20} />
+            <Gap height={20} /> */}
             {
               isLoading ? <ActivityIndicator/> : <>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -80,7 +83,7 @@ import {
                     fontSize: 20,
                     color: '#fff'
                     }}>
-                    {user.name}
+                    {user.first_name}
                 </Text>
 
                 <Text
@@ -112,7 +115,7 @@ import {
                   borderBottomWidth: 1, 
                   borderRadius: 5,
                   padding: 10}}>
-              <View
+              {/* <View
                 style={{
                   width: '50%',
                   paddingRight: 10,
@@ -135,13 +138,13 @@ import {
                   }}>
                   Rp. {Rp(user.balance)}
                 </Text>
-              </View>
+              </View> */}
               <View
                 style={{
                   borderColor: 'rgba(255, 221, 156, 1)',
-                  borderLeftWidth: 1,
-                  width: '50%',
-                  paddingLeft: 10,
+                  // borderLeftWidth: 1,
+                  width: '100%',
+                  // paddingLeft: 10,
                   height: 85,
                 }}>
                 <Text
@@ -172,7 +175,7 @@ import {
                     color: '#fff'
                 }} onPress={() => {
                   navigation.navigate("Favorite")
-                }}>Your Favorites</Text>
+                }}>Your Favorite</Text>
                 
                 <Text style={{
                     marginBottom: 30,
@@ -188,14 +191,14 @@ import {
                     fontSize: 16, 
                     fontFamily: 'Montserrat-SemiBold',
                     color: '#fff'
-                }} onPress={() => navigation.navigate('My Order')}>My Orders</Text>
+                }} onPress={() => navigation.navigate('My Order')}>Order History</Text>
 
 <Text style={{
                     marginBottom: 30,
                     fontSize: 16, 
                     fontFamily: 'Montserrat-SemiBold',
                     color: '#fff'
-                }} onPress={() => navigation.navigate('My Redeem')}>My Redeems</Text>
+                }} onPress={() => navigation.navigate('My Redeem')}>My Redeem</Text>
 
 
                 <Text style={{
@@ -205,6 +208,7 @@ import {
                     color: '#fff'
                 }} onPress={() => {
                   state.set({})
+                  AuthAction.clearSess()
                   navigation.navigate("Login")
                 }}>Log-out</Text>
             </View>
