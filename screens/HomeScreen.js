@@ -355,7 +355,7 @@ const HomeScreen = ({route, navigation, props}) => {
                   minHeight: 80,
                   paddingHorizontal: 15,
                   display: 'flex',
-                  marginBottom: 10,
+                  marginBottom: 10, 
                 }}>
                 <Text
                   style={{
