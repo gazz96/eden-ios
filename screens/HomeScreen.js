@@ -525,11 +525,11 @@ const HomeScreen = ({route, navigation, props}) => {
                 <TouchableOpacity
                   onPress={() => {
                     openInAppBrowser(
-                      'https://www.instagram.com/edenhookahclub/?hl=id',
+                      'https://taplink.cc/edenhookahclub',
                     );
                   }}>
                   <Image
-                    source={require('../assets/images/instagram.png')}
+                    source={require('../assets/images/social-media.png')}
                     style={{width: '100%'}}
                     resizeMode="contain"
                   />

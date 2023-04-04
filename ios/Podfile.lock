@@ -480,6 +480,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
+  - OneSignalXCFramework (< 4.0, >= 3.0)
   - OpenSSL-Universal (= 1.1.1100)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -722,6 +723,6 @@ SPEC CHECKSUMS:
   Yoga: 6c8252e38d65aa387daee699eacf027e055e0b31
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 537ed225b11163c5f50fbd2c192eab96841f7dcc
+PODFILE CHECKSUM: f01a6c97b0a0903248145b274f8b933148ae9a8f
 
 COCOAPODS: 1.12.0

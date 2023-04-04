@@ -95,6 +95,7 @@ import FaqScreen from './screens/FaqScreen';
 // OneSignal Initialization
 OneSignal.setAppId('c09240ad-6762-45f0-97fd-e54610cb4289');
 
+
 // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
 // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
 OneSignal.promptForPushNotificationsWithUserResponse();

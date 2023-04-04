@@ -60,7 +60,7 @@ const BlogsScreen = ({ navigation }) => {
                                     imageStyle={{borderTopLeftRadius: 4, borderTopRightRadius: 4}}
                                     style={{ 
                                         width: '100%', 
-                                        height: 81,
+                                        height: 200,
                                         backgroundColor: '#fff'
                                     }}/>
                                     <Text style={{ 
