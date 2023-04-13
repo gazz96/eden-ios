@@ -219,6 +219,27 @@ const addQty = async(product_id) => {
     }
 }
 
+const deleteCartItem = async(product_id) => {
+  setLoading(true)
+    setCarts([])
+    try {
+        const response = await CartAction.clear({
+            user_id: auth.get().id,
+            product_id: product_id
+        })
+        const carts = await getCarts();
+        if(!carts.length) {
+          navigation.navigate('Home')
+        }
+
+        setCarts(response);
+    }catch(error) {
+        console.log('error', error)
+    }finally{
+        setLoading(false)
+    }
+}
+
   return (
     <LinearGradient colors={['#272727', '#13140D']} style={styles.container}>
       <ImageBackground
@@ -397,17 +418,28 @@ const addQty = async(product_id) => {
                             }}>
                             Rp {Rp(cart.product.price)}
                           </Text>
-                          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 10}}>
-                            <Text style={{fontSize: 24, fontFamily: 'Montserrat-Bold', marginBottom: 5, color: '#fff', marginRight: 8}} onPress={() => {
-                                removeQty(cart.product_id)
+                          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 10}}>
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                              <Text style={{fontSize: 50, fontFamily: 'Montserrat-Bold', color: '#fff', marginRight: 8, marginBottom: 5}} onPress={() => {
+                                  removeQty(cart.product_id)
+                              }}>
+                                  -
+                              </Text>
+                              <Text style={{fontSize: 18, fontFamily: 'Montserrat-Bold', color: '#fff'}}>{cart.qty}</Text>
+                              <Text style={{fontSize: 32, fontFamily: 'Montserrat-Bold', color: '#fff', paddingHorizontal: 8}} onPress={() => {
+                                  addQty(cart.product_id)
+                              }}>
+                                  +
+                              </Text>
+                            </View>
+                            <TouchableOpacity onPress={() => {
+                              deleteCartItem(cart.product_id)
                             }}>
-                                -
-                            </Text>
-                            <Text style={{fontSize: 24, fontFamily: 'Montserrat-Bold', marginBottom: 5, color: '#fff', paddingHorizontal: 8}} onPress={() => {
-                                addQty(cart.product_id)
-                            }}>
-                                +
-                            </Text>
+                              <Image source={require('../assets/images/trash-can.png')} style={{
+                                width: 16,
+                                height: 16
+                              }}/>
+                            </TouchableOpacity>
                           </View>
                         </View>
                        

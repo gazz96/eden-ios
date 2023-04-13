@@ -39,6 +39,23 @@ const FavoritesScreen = ({route, navigation }) => {
         }
     }
 
+    const deleteFavorite = async(product_id) => {
+       
+        setLoading(true)
+        setFavorites([])
+        try {
+            const response = await ProductAction.removeFavorite({
+                user_id: authUser.get().id,
+                product_id: product_id
+            })
+            await getFavorites();
+        }catch(error) {
+            console.log(error)
+        }finally{
+            setLoading(false)
+        }
+    }
+
     const onRefresh = React.useCallback(() => {
         getFavorites();
       }, []);
@@ -57,6 +74,7 @@ const FavoritesScreen = ({route, navigation }) => {
             uri: BASE_URL + '/' + image
         }
     }
+
 
   const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
     const paddingToBottom = 20;
@@ -91,10 +109,12 @@ const FavoritesScreen = ({route, navigation }) => {
                     <View style={{backgroundColor: '#30312D', padding: 11, borderBottomLeftRadius: 5, borderBottomRightRadius: 5}}>
                       <Text style={{fontSize: 12, fontFamily: 'Montserrat-Bold', marginBottom: 5, color: '#fff'}}>{favorite.product.name}</Text>
                       <Text style={{fontSize: 12, fontFamily: 'Montserrat-Bold', marginBottom: 10, color: '#fff'}}>{Rp(favorite.product.price)}</Text>
-                      {/* <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <Icon name="star"/>
-                        <Text style={{marginLeft: 5}}>4.9</Text>
-                      </View> */}
+                      <View style={{flexDirection: 'row', alignItems: 'center', overflow: 'hidden', backgroundColor: '#fff', justifyContent: 'center', borderRadius: 7}}>
+                        <Text style={{color: '#fff', borderRadius: 99, fontFamily: 'Montserrat-Bold', color: 'red', textAlign: 'center', paddingHorizontal: 6, paddingVertical:8}}
+                          onPress={() =>{
+                            deleteFavorite(favorite.product_id)
+                          }}>DELETE</Text>
+                      </View>
                     </View>
                   </View>
                 </TouchableOpacity>

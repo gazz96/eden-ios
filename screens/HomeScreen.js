@@ -171,7 +171,7 @@ const HomeScreen = ({route, navigation, props}) => {
               }}>
               <Image
                 source={require('../assets/images/menu.png')}
-                style={{width: 24, height: 24}}
+                style={{width: 35, height: 35}}
                 resizeMode="contain"
               />
             </TouchableOpacity>
@@ -200,9 +200,9 @@ const HomeScreen = ({route, navigation, props}) => {
                   }}
                   resizeMode="contain"
                   style={{
-                    borderRadius: 30,
-                    width: 30,
-                    height: 30,
+                    borderRadius: 35,
+                    width: 35,
+                    height: 35,
                     borderColor: Colors.muted,
                     borderWidth: 1,
                     backgroundColor: Colors.light,
@@ -216,7 +216,7 @@ const HomeScreen = ({route, navigation, props}) => {
                       color: '#fff',
                       marginLeft: 8,
                       fontFamily: 'Montserrat-SemiBold',
-                      fontSize: 11,
+                      fontSize: 15,
                     }}>
                     {user.first_name}
                   </Text>
@@ -226,7 +226,7 @@ const HomeScreen = ({route, navigation, props}) => {
                       marginLeft: 8,
                       textAlign: 'right',
                       fontFamily: 'Montserrat-SemiBold',
-                      fontSize: 10,
+                      fontSize: 14,
                     }}>
                     {user.point}
                   </Text>
@@ -374,13 +374,23 @@ const HomeScreen = ({route, navigation, props}) => {
                   }}>
                   MEMBERSHIP
                 </Text>
-                <Image
-                  source={require('../assets/images/membership.png')}
-                  style={{
-                    width: 32,
-                    height: 32,
-                  }}
-                />
+                <View style={{
+                  position: 'absolute',
+                  top: 0,
+                  right: -35,
+                  transform: [{
+                    rotate: '45deg'
+                  }],
+                  zIndex: -1
+                }}>
+                  <Image
+                    source={require('../assets/images/qr-code.png')}
+                    style={{
+                      width: 80,
+                      height: 80,
+                    }}
+                  />
+                </View>
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -542,7 +552,7 @@ const HomeScreen = ({route, navigation, props}) => {
                     marginTop: 5,
                     textAlign: 'center',
                   }}>
-                  INSTAGRAM
+                  SOCIAL
                 </Text>
               </View>
 

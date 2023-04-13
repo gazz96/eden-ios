@@ -19,6 +19,10 @@ const CartAction = {
         const response = await axiosRequest.post('carts/clear', data);
         return response.data;
     },
+    removeItem: async() => {
+        const response = await axiosRequest.post('carts/delete-item', data);
+        return response.data;
+    }
 }
 
 export default CartAction;
