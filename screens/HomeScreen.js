@@ -409,7 +409,7 @@ const HomeScreen = ({route, navigation, props}) => {
               flexWrap: 'wrap',
             }}>
             <View style={{width: '49%'}}>
-              <TouchableOpacity onPress={() => navigation.navigate('Shop')}>
+              <TouchableOpacity onPress={() => navigation.navigate('Create Order')}>
                 <LinearGradient
                   colors={['#FFDD9C', '#BC893C']}
                   useAngle={true}
@@ -535,7 +535,7 @@ const HomeScreen = ({route, navigation, props}) => {
                 <TouchableOpacity
                   onPress={() => {
                     openInAppBrowser(
-                      'https://taplink.cc/edenhookahclub',
+                      'https://linktr.ee/edenlounge?utm_source=linktree_admin_share',
                     );
                   }}>
                   <Image

@@ -108,6 +108,15 @@ const CustomDrawer = props => {
           <Gap height={20}/>
           <TouchableOpacity
             onPress={() => {
+              navigation.navigate('MY RESERVATION');
+            }}>
+            <Text style={{color: '#fff', fontFamily: 'Montserrat-SemiBold'}}>
+              MY RESERVATION
+            </Text>
+          </TouchableOpacity>
+          <Gap height={20}/>
+          <TouchableOpacity
+            onPress={() => {
               navigation.navigate('FAQ');
             }}>
             <Text style={{color: '#fff', fontFamily: 'Montserrat-SemiBold'}}>

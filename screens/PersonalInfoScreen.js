@@ -258,12 +258,13 @@ const PersonalInfoScreen = ({navigation}) => {
                 />
 
               <View>
-                <Text style={styles.formLabel}>ADDRESS</Text>
+                <Text style={styles.formLabel}>ADDRESS DETAIL (Optional)</Text>
                 <TextInput
                   style={styles.formControl}
                   onChangeText={text => setValue('address', text)}
                   value={personalInfoState.address.get()}
                 />
+                <Text style={{color: '#ddd', marginTop: 2}}>this address will be use for delivery</Text>
               </View>
               <Gap height={20} />
 

@@ -186,6 +186,15 @@ import {
                   navigation.navigate("Personal Info")
                 }}>Account details</Text>
 
+<Text style={{
+                    marginBottom: 30,
+                    fontSize: 16, 
+                    fontFamily: 'Montserrat-SemiBold',
+                    color: '#fff'
+                }} onPress={() => {
+                  navigation.navigate("My Reservation")
+                }}>My reservation</Text>
+
                 <Text style={{
                     marginBottom: 30,
                     fontSize: 16, 

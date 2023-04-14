@@ -228,7 +228,7 @@ const AddReviewScreen = ({route, navigation}) => {
                         fontSize: 16,
                         color: '#FFFFF0',
                       }}>
-                      SHISA
+                      SHISHA
                     </Text>
                     <Gap height={20} />
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>

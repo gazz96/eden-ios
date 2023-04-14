@@ -24,6 +24,10 @@ const MemberCardScreen = ({ navigation }) => {
 
     
   }
+
+  useEffect(() => {
+    console.log(API_URL + "/user/barcode/?user_id=" + state.get().id)
+  })
   
   return (
     <LinearGradient colors={['#272727', '#13140D']} style={styles.container}>
@@ -31,18 +35,20 @@ const MemberCardScreen = ({ navigation }) => {
             <ScrollView style={{ flex: 1 }}>
                 
             
-                    <Gap height={40}/>
-                    <View style={{flexDirection:'row', justifyContent: 'center', flexWrap: 'wrap'}}>
+                    <Gap height={80}/>
+                    {/* <View style={{flexDirection:'row', justifyContent: 'center', flexWrap: 'wrap'}}>
                         <Image source={{
                             uri: API_URL + "/user/barcode/" + state.get().id
                         }} style={{ width: 92, height: 92}} resizeMode="contain"/>
                     </View>
-                    <Gap height={40}/>
+                    <Gap height={40}/> */}
                     
                     <View style={{ width: '100%', paddingHorizontal: 40, justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap'}}>
                         <Gap height={30}/>
                         
-                        <Image source={require("../assets/images/placeholder-barcode.png")} style={{width: '100%'}} resizeMode="contain"/>
+                        <Image source={{
+                            uri: API_URL + "/user/barcode?user_id=" + state.get().id
+                        }}  style={{width: '100%', height: 100}} resizeMode="contain"/>
                         <Gap height={56}/>
                         <Text style={{fontFamily: 'Montserrat-Regular', letterSpacing: .8, color: '#FFFFF0'}}>Show this QR to our staff</Text>
                         <Gap height={56}/>
