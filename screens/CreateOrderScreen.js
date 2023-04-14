@@ -439,6 +439,7 @@ const CreateOrderScreen = ({route, navigation}) => {
                   ref={addressInputRef}
                   multiline={true}
                   onChangeText={text => form.address.set(text)}
+                  defaultValue={form.address.get()}
                   style={{
                     borderColor: 'rgba(255, 255, 255, 1)',
                     borderWidth: 1,
