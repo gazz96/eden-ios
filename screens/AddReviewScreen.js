@@ -120,9 +120,9 @@ const AddReviewScreen = ({route, navigation}) => {
                       buttonStyle={{
                         backgroundColor: 'transparent',
                         width: '100%',
-                        borderBottomColor: 'rgba(255, 221, 156, 1)',
-                        borderBottomWidth: 1,
-
+                        borderColor: 'rgba(255, 221, 156, 1)',
+                        borderWidth: 1,
+                        borderRadius: 8,
                         paddingLeft: 0,
                       }}
                       buttonTextStyle={{
@@ -228,7 +228,7 @@ const AddReviewScreen = ({route, navigation}) => {
                         fontSize: 16,
                         color: '#FFFFF0',
                       }}>
-                      SHISA
+                      SHISHA
                     </Text>
                     <Gap height={20} />
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -263,6 +263,7 @@ const AddReviewScreen = ({route, navigation}) => {
                         fontSize: 15,
                         fontFamily: 'Montserrat-SemiBold',
                         color: '#FFFFF0',
+                        marginBottom: 5
                       }}
                       onPress={() => {
                         messageInputRef.current.focus();
@@ -274,11 +275,13 @@ const AddReviewScreen = ({route, navigation}) => {
                       multiline={true}
                       onChangeText={text => formState.message.set(text)}
                       style={{
-                        borderBottomColor: 'rgba(255, 221, 156, 1)',
-                        borderBottomWidth: 1,
+                        borderColor: 'rgba(255, 221, 156, 1)',
+                        borderWidth: 1,
                         height: 100,
                         fontFamily: 'Montserrat-Regular',
                         color: '#fffff0',
+                        borderRadius: 8,
+                        padding: 8
                       }}
                     />
                   </View>

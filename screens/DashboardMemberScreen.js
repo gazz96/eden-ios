@@ -104,7 +104,7 @@ import {
                 <TouchableOpacity onPress={() => {
                   navigation.navigate("Personal Info")
                 }}>
-                    <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 15, color: '#fff'}}>Edit Profile</Text>
+                    <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 15, color: '#fff'}}>Edit profile</Text>
                 </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +175,7 @@ import {
                     color: '#fff'
                 }} onPress={() => {
                   navigation.navigate("Favorite")
-                }}>Your Favorite</Text>
+                }}>Your favorite</Text>
                 
                 <Text style={{
                     marginBottom: 30,
@@ -184,21 +184,30 @@ import {
                     color: '#fff'
                 }} onPress={() => {
                   navigation.navigate("Personal Info")
-                }}>Account Details</Text>
-
-                <Text style={{
-                    marginBottom: 30,
-                    fontSize: 16, 
-                    fontFamily: 'Montserrat-SemiBold',
-                    color: '#fff'
-                }} onPress={() => navigation.navigate('My Order')}>Order History</Text>
+                }}>Account details</Text>
 
 <Text style={{
                     marginBottom: 30,
                     fontSize: 16, 
                     fontFamily: 'Montserrat-SemiBold',
                     color: '#fff'
-                }} onPress={() => navigation.navigate('My Redeem')}>My Redeem</Text>
+                }} onPress={() => {
+                  navigation.navigate("My Reservation")
+                }}>My reservation</Text>
+
+                <Text style={{
+                    marginBottom: 30,
+                    fontSize: 16, 
+                    fontFamily: 'Montserrat-SemiBold',
+                    color: '#fff'
+                }} onPress={() => navigation.navigate('My Order')}>Order history</Text>
+
+<Text style={{
+                    marginBottom: 30,
+                    fontSize: 16, 
+                    fontFamily: 'Montserrat-SemiBold',
+                    color: '#fff'
+                }} onPress={() => navigation.navigate('My Redeem')}>My redeem</Text>
 
 
                 <Text style={{

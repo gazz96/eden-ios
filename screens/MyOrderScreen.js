@@ -117,7 +117,7 @@ const MyOrderScreen = ({navigation}) => {
                       color: '#222',
                       fontFamily: 'Montserrat-SemiBold',
                     }} > 
-                    {order.code} 
+                    Package {order.package} -  Bowl {order.how_many_bowl} 
                   </Text>
                   <Text
                     style={{

@@ -131,43 +131,43 @@ const BookTableScreen = ({navigation}) => {
                     lineHeight: 30,
                     letterSpacing: 0.8,
                   }}>
-                  Request for table reservations are accepted at least 1 hours
+                  Request for table reservations are accepted at least 1 hour
                   before the desired visit time
                 </Text>
               </View>
 
-              <Gap height={30} />
-              <SelectDropdown
-                data={branches}
-                defaultValueByIndex="0"
-                defaultButtonText="Select Location"
-                buttonStyle={{
-                  width: '100%',
-                  borderBottomWidth: 1,
-                  borderRadius: 15,
-                  paddingLeft: 0,
-                }}
-                buttonTextStyle={{
-                  fontFamily: 'Montserrat-SemiBold',
-                  color: '#A3A3A3',
-                }}
-                dropdownStyle={{}}
-                onSelect={(selectedItem, index) => {
-                  console.log(selectedItem, index);
-                }}
-                buttonTextAfterSelection={(selectedItem, index) => {
-                  // text represented after item is selected
-                  // if data array is an array of objects then return selectedItem.property to render after item is selected
-                  formState.branch_id.set(selectedItem.id);
-                  return selectedItem.name;
-                }}
-                rowTextForSelection={(item, index) => {
-                  // text represented for each item in dropdown
-                  // if data array is an array of objects then return item.property to represent item in dropdown
-                  return item.name;
-                }}
-              />
-              <Gap height={30} />
+            <Gap height={30} />
+            <SelectDropdown
+              data={branches}
+              defaultValueByIndex="0"
+              defaultButtonText="Select Location"
+              buttonStyle={{
+                width: '100%',
+                borderBottomWidth: 1,
+                borderRadius: 15,
+                paddingLeft: 0,
+              }}
+              buttonTextStyle={{
+                fontFamily: 'Montserrat-SemiBold',
+                color: '#A3A3A3',
+              }}
+              dropdownStyle={{}}
+              onSelect={(selectedItem, index) => {
+                console.log(selectedItem, index);
+              }}
+              buttonTextAfterSelection={(selectedItem, index) => {
+                // text represented after item is selected
+                // if data array is an array of objects then return selectedItem.property to render after item is selected
+                formState.branch_id.set(selectedItem.id);
+                return selectedItem.name;
+              }}
+              rowTextForSelection={(item, index) => {
+                // text represented for each item in dropdown
+                // if data array is an array of objects then return item.property to represent item in dropdown
+                return item.name;
+              }}
+            />
+            <Gap height={30} />
               <TextInput
                 style={styles.formControl}
                 placeholder="First Name"

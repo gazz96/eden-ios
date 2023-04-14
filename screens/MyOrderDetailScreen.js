@@ -53,7 +53,7 @@ import { useHookstate } from '@hookstate/core';
               onPress={() => navigation.goBack()}
               title={''}
             />
-            <Gap height={25} />
+            {/* <Gap height={25} />
             <Text
               style={{
                 fontFamily: 'Montserrat-Bold',
@@ -71,7 +71,7 @@ import { useHookstate } from '@hookstate/core';
             </View>
             <View>
               <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Address: {order.address}</Text>
-            </View>
+            </View> */}
 
             <Gap height={20} />
             <Text
@@ -82,7 +82,43 @@ import { useHookstate } from '@hookstate/core';
               }}>
               ORDER DETAIL
             </Text>
-            <Gap height={20} />
+            <Gap height={20}/>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Package: {order.package}</Text>
+            </View>
+            <Gap height={20}/>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>How many bowl: {order.how_many_bowl}</Text>
+            </View>
+            <Gap height={20}/>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Level of strength: {order.level_of_strength}</Text>
+            </View>
+            <Gap height={20}/>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Flavour {order.flavour}</Text>
+            </View>
+            <Gap height={20}/>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Mint or Ice ? {order.mint_or_ice}</Text>
+            </View>
+            <Gap height={20}/>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Comments: {order.comments}</Text>
+            </View>
+            <Gap height={20}/>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Address: {order.address}</Text>
+            </View>
+            <Gap height={20}/>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Time of delivery: {order.time_of_delivery}</Text>
+            </View>
+            <Gap height={20}/>
+            <View>
+              <Text style={{fontFamily: 'Montserrat-Semibold', color: '#fff'}}>Pick of delivery: {order.time_of_pickup}</Text>
+            </View>
+            
             
             {/* <TextInput placeholder='Cari pesanan' style={{
               color: '#222',
@@ -153,7 +189,7 @@ import { useHookstate } from '@hookstate/core';
             </View>
           </ScrollView>
           <View style={{backgroundColor: '#fff', padding: 20}}>
-            <Text style={{color: '#222', fontFamily: 'Montserrat-Bold', fontSize: 16}}>TOTAL Rp {Rp(total.get())}</Text>
+            <Text style={{color: '#222', fontFamily: 'Montserrat-Bold', fontSize: 16}}>TOTAL Rp {Rp(order.amount)}</Text>
           </View>
         </ImageBackground>
       </LinearGradient>

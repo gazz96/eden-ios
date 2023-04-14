@@ -30,7 +30,11 @@ const ProductAction = {
             params: data
         })
         return response.data;
-    }
+    },
+    removeFavorite: async(data) => {
+        const response = await axiosRequest.post('favorite/delete', data);
+        return response.data;
+    },
 }
 
 export default ProductAction;

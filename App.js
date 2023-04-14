@@ -90,6 +90,8 @@ import { hookstate } from '@hookstate/core';
 import ChangeLangScreen from './screens/ChangeLangScreen';
 import HomeOrderScreen from './screens/HomeOrderScreen';
 import FaqScreen from './screens/FaqScreen';
+import CreateOrderScreen from './screens/CreateOrderScreen';
+import MyReservationScreen from './screens/MyReservationScreen';
 
 
 // OneSignal Initialization
@@ -132,6 +134,10 @@ function MyDrawer() {
       }}/>
 
       <Drawer.Screen name="FAVORITES" component={FavoritesScreen} options={{
+        drawerLabel: 'FAVORITE EDEN'
+      }}/>
+
+      <Drawer.Screen name="MY RESERVATION" component={MyReservationScreen} options={{
         drawerLabel: 'FAVORITE EDEN'
       }}/>
 
@@ -221,6 +227,8 @@ const App = () => {
           <Stack.Screen name="Order Detail" component={MyOrderDetailScreen}/>
           <Stack.Screen name="Change Lang" component={ChangeLangScreen}/>
           <Stack.Screen name="Favorite" component={FavoritesScreen}/>
+          <Stack.Screen name="Create Order" component={CreateOrderScreen}/>
+          <Stack.Screen name="My Reservation" component={MyReservationScreen}/>
           
           
         </Stack.Navigator>

@@ -111,17 +111,28 @@ import {
                       {JSON.parse(order.items[0].gift)?.name}
                     </Text>
                     <Gap height={5} />
+                    <View>
+                      <Text
+                        style={{
+                          color: '#222',
+                          fontFamily: 'Montserrat-SemiBold',
+                          marginBottom: 10
+                        }}>
+                        {order.code}
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#888888',
+                          fontFamily: 'Montserrat-SemiBold',
+                        }}>
+                        Please pickup the redeemed item at nearest store
+                      </Text>
+                    </View>
                     <Text
                       style={{
                         color: '#222',
                         fontFamily: 'Montserrat-SemiBold',
-                      }}>
-                      {order.code}
-                    </Text>
-                    <Text
-                      style={{
-                        color: '#222',
-                        fontFamily: 'Montserrat-SemiBold',
+                        color: '#222'
                       }}>
                       {order.order_date}
                     </Text>
@@ -146,7 +157,8 @@ import {
                           fontFamily: 'Montserrat-SemiBold',
                           fontSize: 16
                         }}>
-                        {order.status}
+                        {/* {order.status} */}
+                        
                       </Text>
                     </View>
                   </View>

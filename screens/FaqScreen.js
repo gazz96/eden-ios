@@ -32,20 +32,27 @@ const FaqScreen = ({route, navigation}) => {
                     <Gap height={30}/>
                      <View style={{paddingHorizontal: 20}}>
                         <View style={{marginBottom: 20}}>
-                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>QUESTION: QUESTION </Text>
-                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>ANSWER</Text>
+                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>{'\u2022'} What is the EDC? </Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>EDC or Eden Coin is a point reward that you can use for redeem gifts offered on our apps.</Text>
                         </View>
                         <View style={{marginBottom: 20}}>
-                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>QUESTION: QUESTION </Text>
-                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>ANSWER</Text>
+                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>{'\u2022'} Where I can collect my redeemed gifts? </Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>Please collect your redeemed gifts at our nearest store in your area, please refer to our maps in app to see location.</Text>
                         </View>
                         <View style={{marginBottom: 20}}>
-                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>QUESTION: QUESTION </Text>
-                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>ANSWER</Text>
-                        </View>
-                        <View style={{marginBottom: 20}}>
-                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>QUESTION: QUESTION </Text>
-                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>ANSWER</Text>
+                            <Text style={{fontFamily: 'Montserrat-SemiBold', fontSize: 16, color: '#fff', marginBottom: 5}}>{'\u2022'} What is benefit of membership? </Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>
+                            - Silver member entitled to get 5% discount and converted as EDC for every shishs purchases.
+                            </Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>
+                            - Gold entitled to get 10% discount and converted as EDC for every shishs purchases.
+                            </Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, color: '#fff'}}>
+                            - Platinum member entitled to get 15% discount and converted as EDC for every shishs purchases.
+                            </Text>
+
+                            
+                            
                         </View>
                      </View>
                 {/* </ScrollView> */}
